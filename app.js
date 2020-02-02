@@ -85,7 +85,7 @@ app.delete('/deleteFriend', upload.array(), function (req, res, next) {
     let friendID = req.body.friendID;
 
     sql.connect(config).then(() => {
-        return sql.query`DELETE FROM FinalProject_Kasem_FriendsTB WHERE (User_ID = ${userID} AND Friend_ID = ${friendID}) || (User_ID = ${friendID} AND Friend_ID = ${userID});`
+        return sql.query`DELETE FROM FinalProject_Kasem_FriendsTB WHERE (User_ID = ${userID} AND Friend_ID = ${friendID}) OR (User_ID = ${friendID} AND Friend_ID = ${userID});`
     }).then(result => {
         sql.close();
         res.send(result.rowsAffected > 0 ? 'Done!' : 'Something wrong happened');
